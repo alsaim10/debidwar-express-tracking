@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debidwar Express - Order Tracking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .order-list, .track-order {
+      background: white;
+      padding: 20px;
+      margin: 20px auto;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .order {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .order:last-child {
+      border-bottom: none;
+    }
+    select {
+      padding: 5px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px 15px;
+      margin-top: 10px;
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0b5ed7;
+    }
+    .status {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Debidwar Express - Order Tracking</h1>  <div class="order-list">
+    <h2>Manage Orders</h2>
+    <div class="order">
+      <div>
+        <strong>Order ID:</strong> 12345 <br>
+        <small>Customer: Rahim</small>
+      </div>
+      <select onchange="updateStatus('12345', this.value)">
+        <option>Pending</option>
+        <option>Picked Up</option>
+        <option>On the Way</option>
+        <option>Delivered</option>
+      </select>
+    </div>
+    <!-- আরও অর্ডার চাইলে এখান থেকে কপি করে নিচে বসাও -->
+  </div>  <div class="track-order">
+    <h2>Track Your Order</h2>
+    <input type="text" id="trackId" placeholder="Enter Order ID">
+    <button onclick="trackOrder()">Track</button>
+    <div id="trackResult" class="status"></div>
+  </div>  <script>
+    let orders = {
+      "12345": "Pending"
+    };
+
+    function updateStatus(orderId, status) {
+      orders[orderId] = status;
+      alert("Status updated to: " + status);
+    }
+
+    function trackOrder() {
+      const id = document.getElementById('trackId').value;
+      const status = orders
